@@ -1,0 +1,39 @@
+﻿    <table width="100%">
+    <tr>
+        <td width="50%" valign="top">
+        <span ng-class="myCssVar"> <h2>Product Details</h2><hr /> <br /><br />
+        Product Id: {{ products.id }} <br /><br />
+        Product Name: {{ products.name  }} <br /><br />
+        <input type="button" value="Show big text size" ng-click="myCssVar='css-class'">
+        <input type="button" value="Back to original" ng-click="myCssVar=''">
+        <br /><br />
+        <a href="#/">Back</a> 
+        </span>
+        </td>
+        <td width="50%" valign="top">
+            <table width="100%" cellpadding="10" cellspacing="10" style="border:1px;border-style:solid;padding:10px;">
+                <tr>
+                    <td><a href="#/products/{{ x.id }}" style="text-decoration:none"><img src="products/{{ products.image }}" width="500px" border="0" /> </a></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<input type="text" ng-model="txtName" /><br />
+
+<div ng-show="txtName">Being shown {{ txtName }} </div>
+<div ng-hide="txtName">Being hided</div>
+
+<div ng-if="txtName">I am not empty</div>
+
+<button ng-dblclick="count = count+1" ng-init="count=0">Click to ++</button>
+count: {{ count }}
+
+
+<br />
+Click me: <input type="checkbox" ng-model="checked" ng-init="checked=true" /><br/>
+Show when checked:
+<span ng-if="checked" class="animate-if">
+  I'm removed when the checkbox is unchecked.
+</span>

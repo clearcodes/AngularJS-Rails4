@@ -1,0 +1,188 @@
+
+<style type="text/css">
+	input.ng-invalid {
+  		border: 1px solid red;
+	}
+	input.ng-valid {
+  		border: 1px solid green;
+	}
+	.error
+	{
+		color:red;
+		font-size: small;
+	}
+	.tableOdd {
+            background-color: lightgray;
+        }
+        .tableEven {
+            background-color: orange;
+        }
+</style>
+
+<div class="navbar navbar-inverse">
+		<div class="container">
+			<a class="navbar-brand" href="#">AngularJS in 2 hours by Rakesh Gupta</a>
+		</div>
+	</div>
+
+<div class="container">
+			<a class="navbar-brand" href="#">MyCapexBook</a>
+</div>	
+
+{{ errorMessage }}
+
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12">
+			
+			<div class="col-lg-7">
+				Search by title: <input type="text" ng-model="item" />&nbsp;&nbsp;
+				<br /><br /><hr />
+				<button ng-click="CreateItem()">+ Add</button>
+			</div>
+			<div class="col-lg-5">
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+<div class="row">
+				<div class="col-lg-12">
+					<div class="col-lg-8">
+						<div class="col-lg-12">
+							<div class="col-lg-3">
+								<a href="" ng-click="predicate = 'title'; reverse=!reverse"><h4>Title</h4></a>
+							</div>
+							<div class="col-lg-3">
+								<a href="" ng-click="predicate = 'ex_type'; reverse=!reverse"><h4>Type</h4></a>
+							</div>
+							<div class="col-lg-3">
+								<a href="" ng-click="predicate = 'created_at'; reverse=!reverse"><h4>Date</h4></a>
+							</div>
+							<div class="col-lg-3">
+								<h4>Action</h4>	
+							</div>
+							<br /><hr/>
+						</div>
+						<div class="col-lg-12" ng-repeat="capex in filtered = (capexes | filter: item | orderBy: predicate:reverse)">
+							<!--ng-class="{ tableEven: ($index%2), tableOdd: !($index%2) }"-->
+							<div class="col-lg-3">
+								<a href="" ng-click='ShowDetail(capex.id)'>{{ capex.title }}</a>
+							</div>
+							<div class="col-lg-3">
+								<span ng-show="capex.ex_type == 1">Expense</span>
+								<span ng-show="capex.ex_type == 2">Capital</span>
+							</div>
+							<div class="col-lg-3">
+								{{ capex.created_at | date : fullDate }}
+							</div>
+							<div class="col-lg-3">
+								<a href="" ng-click='ShowDetail(capex.id)'>Show</a>
+							</div>
+							<br /><br />
+						</div>
+						<div class="col-lg-12" ng-hide="filtered.length > 0">
+							<h2>Nothing found</h2>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="container" ng-show="detail == true">
+							<div class="col-lg-12">
+												<div class="col-lg-12">
+													<b>Id</b> : {{ id_show }} <br />
+													<b>Title</b> : 
+													<input type="text" ng-model="title_show"  class="form-control" ng-show="edit == true" />
+													<span ng-show="edit == false">{{ title_show }} </span>
+													<br />
+													<b>Description</b> : 
+													<input type="text" ng-model="description_show"  class="form-control" ng-show="edit == true" />
+													<span ng-show="edit == false">{{ description_show }}</span> <br />
+													<b>Type</b> : 
+													<span ng-show="ex_type_show == 1">Expense</span> 
+													<span ng-show="ex_type_show == 2">Capital</span>
+													<br />
+													<b>Amount</b> : 
+													<input type="text" ng-model="amount_show"  class="form-control" ng-show="edit == true" />
+													<span ng-show="edit == false">{{ amount_show | currency: '£' }}</span><br />
+													<b>Date</b> : {{ created_at_show | date : fullDate }}<br /><br />
+													<button ng-click="EditMode()" ng-show="edit == false"> Edit </button>
+													<button ng-show="edit == false" ng-click="DeleteItem(id_show)"> Delete </button>
+													<button ng-show="edit == true" ng-click="EditModeSave()"> Save </button>
+													<button ng-show="edit == true" ng-click="CancelEdit()"> Cancel </button>
+												</div>
+							</div>
+						</div>
+						<div class="container" ng-show="newitem == true">
+							<div class="col-lg-12">
+												<div class="col-lg-12">
+													<form name="frmNewItem" novalidate>
+													<div class="form-group">
+														<b>Title</b> : <br />
+														<input type="text" ng-model="title_new" name="title_new" style="width:300px;" ng-minlength="5" class="form-control" ng-required="true" />
+														<div class="error" ng-show="frmNewItem.$invalid">
+														    <p class="error" 
+														        ng-show="frmNewItem.title_new.$error.required">
+														        Your name is required.
+														    </p>
+														    <p class="error" 
+														            ng-show="frmNewItem.title_new.$error.minlength">
+														            Your name is required to be at least 5 characters
+														    </p>
+													  	</div>
+														<b>Description</b> :  <br />
+														<input type="text" ng-model="description_new"  name="description_new" class="form-control" style="width:300px;" ng-minlength="5" ng-required="true" />
+
+														<div class="error" ng-show="frmNewItem.$invalid">
+														    <p class="error" 
+														        ng-show="frmNewItem.description_new.$error.required">
+														        Description is required.
+														    </p>
+														    <p class="error" 
+														            ng-show="frmNewItem.description_new.$error.minlength">
+														            Description is required to be at least 5 characters
+														    </p>
+													  	</div>
+														<b>Type</b> :  <br />
+														<input type="number" ng-model="type_new" name="type_new"  class="form-control" style="width:50px;"ng-minlength="1" ng-required="true" /> 
+														<div class="error" ng-show="frmNewItem.$invalid">
+														    <p class="error" 
+														        ng-show="frmNewItem.type_new.$error.required">
+														        Type is required and should be numeric
+														    </p>
+														    <p class="error" 
+														            ng-show="frmNewItem.type_new.$error.minlength">
+														            Type is required to be at least 1 digit
+														    </p>
+													  	</div>
+														<b>Amount</b> :  <br />
+														<input type="number" ng-model="amount_new" name="amount_new" class="form-control" ng-minlength="1" ng-required="true"  />
+														<div class="error" ng-show="frmNewItem.$invalid">
+														    <p class="error" 
+														        ng-show="frmNewItem.amount_new.$error.required">
+														        Amount is required and should be a numeric
+														    </p>
+														    <p class="error" 
+														            ng-show="frmNewItem.amount_new.$error.minlength">
+														            Amount is required to be at least 1 digit
+														    </p>
+													  	</div>
+													  	<br />
+														<input type="submit" value="Save" ng-click="NewModeSave()" ng-disabled="frmNewItem.$invalid" />
+														<button ng-click="CancelNew()"> Cancel </button>
+													</div>
+													</form>
+												</div>
+							</div>
+						</div>
+
+						<div class="container" ng-show="detail == false && newitem == false">
+							<h1>tap hyperlink to start</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+</div>			
+
+
+

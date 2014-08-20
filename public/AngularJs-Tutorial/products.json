@@ -1,0 +1,52 @@
+[
+ {
+  "id": "1",
+  "name": "IPhone",
+  "image": "iphone.jpg"
+ },
+{
+  "id": "2",
+  "name": "Blackberry Z10",
+  "image": "blackberry-z10.jpg"
+ }, 
+{
+  "id": "3",
+  "name": "IPad mini black",
+  "image": "ipad-mini-black.jpg"
+ },
+{
+  "id": "4",
+  "name": "Samsung tab 4",
+  "image": "samsung-tab.png"
+ },
+{
+  "id": "5",
+  "name": "Samsung Galaxy S5",
+  "image": "Samsung-Galaxy-S5.jpg"
+ },
+{
+  "id": "6",
+  "name": "Nokia Lumia 520",
+  "image": "Nokia-Lumia-520.jpg"
+ },
+{
+  "id": "7",
+  "name": "Motorola Moto G Black",
+  "image": "Motorola_Moto_G_Black_Multi_356x267.jpg"
+ },
+{
+  "id": "8",
+  "name": "Micromax Canvas",
+  "image": "micromax-canvas.png"
+ },
+{
+  "id": "9",
+  "name": "Mi3",
+  "image": "Mi3.jpg"
+ },
+{
+  "id": "10",
+  "name": "karbonn",
+  "image": "karbonn.jpg"
+ }
+]

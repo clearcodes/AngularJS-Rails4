@@ -1,0 +1,77 @@
+﻿<style>
+        .tableOdd {
+            background-color: green;
+        }
+        .tableEven {
+            background-color: gold;
+        }
+</style>
+
+<table width="100%">
+    <tr>
+        <td width="20%" valign="top"><br />Search a product: <br /><br /><input type="search" ng-model="q" placeholder="search..." />
+        <br />{{ q }}
+        <br />
+        <a href="#/weather">Weather Reports</a><br /><br />
+        <a href="#/capex">My Capex Reports</a>
+        </td>
+        <td width="80%" valign="top">
+            <table width="100%" cellpadding="10" cellspacing="10" style="border:1px;border-style:solid;padding:10px;">
+                <tr style="background-color:Silver">
+                    <td colspan="2">Total original records: {{ products.length }}<br />
+                    Filtered count: {{ filtered.length }}
+                        
+                    </td>
+                </tr>
+                <tr ng-repeat="x in filtered = (products | filter:q)" ng-class="{ tableEven: ($index%2), tableOdd: !($index%2) }">
+                    <td><a href="#/products/{{ x.id }}" style="text-decoration:none"><img src="products/{{ x.image }}" width="100px" border="0" /> </a></td>
+                    <td><a href="#/products/{{ x.id }}" style="text-decoration:none;font-size:large;color:White">{{ x.name }}</a></td>
+                    
+                </tr>
+                <tr ng-if="filtered.length == 0">
+                    <td>
+                        <h2>Nothing found</h2>
+                    </td>
+                </tr>
+
+                <tr ng-show="filtered.length == 0">
+                    <td>
+                        <h1>Nothing found</h1>
+                    </td>
+                </tr>
+               <!-- <tr>
+                    <td colspan="2">
+                        <span ng-if="q == 'apple'">
+                            You got apple. You just wait...
+                        </span>
+                    </td>
+                </tr>
+                {{ results.length }}
+                <tr>
+                    <td colspan="2">
+                        <div ng-switch on="q">
+                            <div ng-switch-when="apple">Apple</div>
+                            <div ng-switch-when="orange">Orange</div>
+                            <div ng-switch-default>Nothing dude</div>
+                        </div>
+                    </td>
+                </tr>-->
+
+              <!--  <tr>
+                    <td colspan="2">
+                        <div ng-if="results.length == 0">
+                            <strong>No results found...</strong>
+                        </div>
+                    </td>
+                </tr>-->
+
+            </table>
+        </td>
+    </tr>
+</table>
+
+<script type="text/javascript">
+    function clickme() {
+        alert('hello');
+    }
+</script>

@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @capex.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @capex.description %>
+</p>
+
+<p>
+  <strong>Ex type:</strong>
+  <%= @capex.ex_type %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @capex.amount %>
+</p>
+
+<%= link_to 'Edit', edit_capex_path(@capex) %> |
+<%= link_to 'Back', capexes_path %>

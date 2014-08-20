@@ -1,0 +1,33 @@
+<h1>Listing capexes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Ex type</th>
+      <th>Amount</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @capexes.each do |capex| %>
+      <tr>
+        <td><%= capex.title %></td>
+        <td><%= capex.description %></td>
+        <td><%= capex.ex_type %></td>
+        <td><%= capex.amount %></td>
+        <td><%= link_to 'Show', capex %></td>
+        <td><%= link_to 'Edit', edit_capex_path(capex) %></td>
+        <td><%= link_to 'Destroy', capex, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Capex', new_capex_path %>
